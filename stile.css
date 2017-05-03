@@ -1,0 +1,41 @@
+header {
+    text-align-last: center;
+    border: 1px solid red;
+}
+
+main {
+    text-align: center;
+    border: 1px solid blue;
+}
+
+section {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+}
+
+.flexCol {
+    flex-basis: 40%;
+    border: 1px solid brown;
+}
+
+.tabella {
+	height: 100%;
+    border: 1px solid darkblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+}
+
+img {
+    width: 50%;
+    height: auto;
+    border: 1px solid orange;
+}
+
+footer {
+    text-align: center;
+    border: 1px solid green;
+}
+

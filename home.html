@@ -5,14 +5,43 @@
     <title>Che tempo fa?</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="stile.css">	<!-- Custom css -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>	<!-- Jquery -->
-    <script src="interrogazioni.js"></script>	<!-- Custom javascript -->
+    <link rel="stylesheet" type="text/css" href="stile.css">
+    <!-- Custom css -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Jquery -->
+    <script src="interrogazioni.js"></script>
+    <!-- Custom javascript -->
 </head>
 
 <body>
-<p>Lodi: <span>temp</span></p>
-<button id="btn">Invia richiesta</button>
+    <header>
+        <h1>Tempo in diretta</h1>
+    </header>
+    <main>
+        <h2>LODI</h2>
+        <section>
+            <div class="flexCol">
+                <img src="immagini/meteo.png">
+            </div>
+            <div class="flexCol">
+                <div class="tabella">
+                    <div class="cella">Tempo: <span>Nuvoloso</span></div>
+                    <div class="cella">Temperatura: <span>33 gradi</span></div>
+                    <div class="cella">min Max: <span>26 gradi 36 gradi</span></div>
+                    <div class="cella">Vento: <span>10 km/h</span></div>
+                    <div class="cella">Pressione: <span>1345</span></div>
+                    <div class="cella">Alba: <span>07:00</span></div>
+                    <div class="cella">Tramonto: <span>19:00</span></div>
+                    <div class="cella">Umidità: <span>10%</span></div>
+                    <div class="cella">Precipitazioni: <span>5mm</span></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>Icone presa da ...</p>
+        <p>Immagini prese da ...</p>
+    </footer>
 </body>
 
 </html>
