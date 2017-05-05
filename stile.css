@@ -34,24 +34,10 @@ article.odierno {
     justify-content: space-around;
 }
 
-.flexCol:first-child > a > img {
+.flexCol:first-child > div > img {
     flex: 1;
-}
-
-article.previsioni {
-	border: 1px solid darkred;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-}
-
-.previsioniCol {
-	display: flex;
-}
-
-.previsioniCol > img {
-	width: 100%;
-	height: auto;
+    width: 200px;
+    height: auto;
 }
 
 footer {

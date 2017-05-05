@@ -36,7 +36,7 @@ $(document).ready(function() {
                 $('.cella').eq(6).find('span').text(risposta.main.humidity);
                 $('.cella').eq(7).find('span').text((new Date(risposta.sys.sunrise * 1000)).toLocaleTimeString().slice(0, 5));
                 $('.cella').eq(8).find('span').text((new Date(risposta.sys.sunset * 1000)).toLocaleTimeString().slice(0, 5));
-                $('.flexCol').find('img').attr('src', 'http://openweathermap.org/img/w/'+risposta.weather.icon+'.png');
+                $('.flexCol').find('img').attr('src', 'icone/' + risposta.weather[0].icon + '.svg');
             })
             .fail(function() {
                 window.alert('error');
