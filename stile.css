@@ -8,7 +8,7 @@ main {
     border: 1px solid blue;
 }
 
-section {
+article.odierno {
     border: 1px solid black;
     display: flex;
     justify-content: center;
@@ -28,16 +28,31 @@ section {
 }
 
 .flexCol:first-child {
-	border-color: lightgreen;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
+    border-color: lightgreen;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .flexCol:first-child > a > img {
-	flex: 1;
+    flex: 1;
 }
 
+article.previsioni {
+	border: 1px solid darkred;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.previsioniCol {
+	display: flex;
+}
+
+.previsioniCol > img {
+	width: 100%;
+	height: auto;
+}
 
 footer {
     text-align: center;
