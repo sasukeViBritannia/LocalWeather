@@ -1,3 +1,8 @@
+html {
+    background: url(immagini/tuoni.jpg) no-repeat fixed center;
+    background-size: cover;
+}
+
 header {
     text-align-last: center;
     border: 1px solid red;
@@ -17,6 +22,8 @@ article.odierno {
 .flexCol {
     flex-basis: 40%;
     border: 1px solid brown;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .tabella {
@@ -36,7 +43,8 @@ article.odierno {
 
 .flexCol:first-child > div > img {
     flex: 1;
-    width: 200px;
+    max-width: 200px;
+    width: 100%;
     height: auto;
 }
 
