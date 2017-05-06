@@ -3,6 +3,7 @@ $(document).ready(function() {
 
     var lat = 45.30; /*latitudine di Lodi*/
     var lon = 9.50; /*longitudine di lodi*/
+    var temperatura = 0;
 
     /*lat = 63.4667;
     lon = 142.8167;*/
@@ -40,6 +41,7 @@ $(document).ready(function() {
                 $('.flexCol').find('img').attr('src', 'icone/' + risposta.weather[0].icon + '.svg');
                 $('main').find('h2').text(risposta.name + ', ' + risposta.sys.country);
                 impostaSfondo(risposta.weather[0].icon);
+                temperatura = Math.round(risposta.main.temp);
             })
             .fail(function() {
                 window.alert('error');
@@ -93,4 +95,15 @@ $(document).ready(function() {
         $('body').css('backgroundImage', 'url(immagini/' + imgSfondo + '.jpg)');
     }
 
+    $('#fromXtoY').on('click', function() {
+        var scala = $('#scala').text();
+        var conversione = temperatura;
+        var misura = 'C';
+        if (scala == 'C') {
+            conversione = ($('#temp').text() * 1.8 + 32).toFixed(1);
+            misura = 'F';
+        }
+        $('#temp').text(conversione);
+        $('#scala').text(misura);
+    });
 });
