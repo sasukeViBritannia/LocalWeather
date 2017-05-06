@@ -1,4 +1,4 @@
-html {
+body {
     background: url(immagini/tuoni.jpg) no-repeat fixed center;
     background-size: cover;
 }
@@ -11,6 +11,7 @@ header {
 main {
     text-align: center;
     border: 1px solid blue;
+    margin: 50px 0;
 }
 
 article.odierno {
@@ -20,10 +21,17 @@ article.odierno {
 }
 
 .flexCol {
-    flex-basis: 40%;
+    flex-basis: 20%;
     border: 1px solid brown;
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flexCol > div {
+	width: 100%;
 }
 
 .tabella {
@@ -34,18 +42,17 @@ article.odierno {
     justify-content: space-around;
 }
 
-.flexCol:first-child {
-    border-color: lightgreen;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
 
-.flexCol:first-child > div > img {
-    flex: 1;
+.flexCol > div > img {
     max-width: 200px;
     width: 100%;
     height: auto;
+}
+
+.flexCol:first-child > div > p {
+	font-size: 100px;
+	margin: 0;
+	float: center;
 }
 
 
