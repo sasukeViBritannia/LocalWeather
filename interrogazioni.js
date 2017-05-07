@@ -9,26 +9,26 @@ $(document).ready(function() {
     lon = 142.8167;*/
     /*aziona(lat, lon);*/
 
-    /* if ("geolocation" in navigator) {
-         navigator.geolocation.getCurrentPosition(function(position) {
-             lat = position.coords.latitude;
-             lon = position.coords.longitude;
-             window.alert('Coordinate di Lodi: ' + lat + ', ' + lon);
-             /*aziona(lat, lon);
-         });
-     } else
-         window.alert('Non è geolocalizzato');*/
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            lat = position.coords.latitude;
+            lon = position.coords.longitude;
+            /*window.alert('Coordinate di Lodi: ' + lat + ', ' + lon);*/
+            aziona(lat, lon);
+        });
+    } else
+        window.alert('Non è geolocalizzato');
 
 
-    $('#btn').on('click', function() {
-        /*function aziona(lat, lon) {*/
+    /*$('#btn').on('click', function() {*/
+    function aziona(lat, lon) {
         $.ajax({
                 url: 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&APPID=a9fa46b00d88fcc6181dac9c6db790e6&units=metric',
                 type: 'GET',
                 dataType: 'json',
             })
             .done(function(risposta) {
-                window.alert('success');
+                /*window.alert('success');*/
                 $('main').children('p').text('(' + risposta.coord.lat + ', ' + risposta.coord.lon + ')');
                 $('.cella').eq(0).find('span').text((new Date(risposta.dt * 1000)).toLocaleDateString());
                 $('.cella').eq(1).find('span').text(risposta.weather[0].main);
@@ -42,15 +42,17 @@ $(document).ready(function() {
                 $('main').find('h2').text(risposta.name + ', ' + risposta.sys.country);
                 impostaSfondo(risposta.weather[0].icon);
                 temperatura = Math.round(risposta.main.temp);
+                $('body').show();
+
             })
             .fail(function() {
                 window.alert('error');
             })
             .always(function() {
-                window.alert('conclusa');
+                window.console('conclusa');
             });
-    });
-    /* }*/
+        /*});*/
+    }
 
     function impostaSfondo(tempo) {
         /*window.alert('Funzione sfondo chiamata da: ' + tempo);*/
@@ -92,16 +94,18 @@ $(document).ready(function() {
                 window.alert('Nessuno sfondo selezionato');
                 break;
         }
-        $('body').css('backgroundImage', 'url(immagini/' + imgSfondo + '.jpg)');
+        $('body').css({ 'background': 'url(immagini/' + imgSfondo + '.jpg) no-repeat fixed center', 'backgroundSize': 'cover' });
     }
 
     $('#fromXtoY').on('click', function() {
         var scala = $('#scala').text();
+        $(this).text('Fahrenheit');
         var conversione = temperatura;
         var misura = 'C';
         if (scala == 'C') {
             conversione = ($('#temp').text() * 1.8 + 32).toFixed(1);
             misura = 'F';
+            $(this).text('Celsius');
         }
         $('#temp').text(conversione);
         $('#scala').text(misura);

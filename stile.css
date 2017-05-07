@@ -1,6 +1,6 @@
 body {
-    background: url(immagini/tuoni.jpg) no-repeat fixed center;
-    background-size: cover;
+    background-color: lightgrey;
+    display: none;
 }
 
 header {
@@ -69,6 +69,12 @@ article.odierno {
 
 #fromXtoY {
     margin-top: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: black;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 footer {
