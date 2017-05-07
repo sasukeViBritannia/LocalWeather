@@ -5,7 +5,6 @@ body {
 
 header {
     text-align-last: center;
-    border: 1px solid red;
 }
 
 h1 {
@@ -14,7 +13,6 @@ h1 {
 
 main {
     text-align: center;
-    border: 1px solid blue;
     margin: 40px 0;
 }
 
@@ -23,7 +21,6 @@ h2 {
 }
 
 article.odierno {
-    border: 1px solid black;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -31,7 +28,6 @@ article.odierno {
 
 .flexCol {
     flex-basis: 20%;
-    border: 1px solid brown;
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.3);
     display: flex;
@@ -44,8 +40,6 @@ article.odierno {
 }
 
 .tabella {
-    /*height: 100%;*/
-    border: 1px solid darkblue;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -79,7 +73,6 @@ article.odierno {
 
 footer {
     text-align: center;
-    border: 1px solid green;
     font-weight: bold;
 }
 

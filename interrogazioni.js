@@ -1,61 +1,66 @@
 'use strict';
 $(document).ready(function() {
 
-    var lat = 45.30; /*latitudine di Lodi*/
-    var lon = 9.50; /*longitudine di lodi*/
+    var lat = 0;
+    var lon = 0;
     var temperatura = 0;
 
-    /*lat = 63.4667;
-    lon = 142.8167;*/
-    /*aziona(lat, lon);*/
-
+    /*Controllo se presesenta la funzione di geolocalizzazione */
     if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            lat = position.coords.latitude;
-            lon = position.coords.longitude;
-            /*window.alert('Coordinate di Lodi: ' + lat + ', ' + lon);*/
-            aziona(lat, lon);
-        });
+        navigator.geolocation.getCurrentPosition(consenso, nonConsenso);
     } else
         window.alert('Non è geolocalizzato');
 
+    /*Funzione si attiva se l'utente da il consenso*/
+    function consenso(position) {
+        lat = position.coords.latitude;
+        lon = position.coords.longitude;
+        estraiDati(lat, lon);
+    }
 
-    /*$('#btn').on('click', function() {*/
-    function aziona(lat, lon) {
+    /*Funzione si attiva se l'utente NON da il consenso*/
+    function nonConsenso() {
+        window.alert('Non hai dato il permesso per attivare la geolocalizzazione');
+    }
+
+    /*Funzione che effettua una chiamata ajax e gestisce la risposta in formato json.*/
+    function estraiDati(lat, lon) {
+        /*Chiamata ajax verso il server esterno*/
         $.ajax({
                 url: 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&APPID=a9fa46b00d88fcc6181dac9c6db790e6&units=metric',
                 type: 'GET',
                 dataType: 'json',
             })
             .done(function(risposta) {
-                /*window.alert('success');*/
-                $('main').children('p').text('(' + risposta.coord.lat + ', ' + risposta.coord.lon + ')');
-                $('.cella').eq(0).find('span').text((new Date(risposta.dt * 1000)).toLocaleDateString());
-                $('.cella').eq(1).find('span').text(risposta.weather[0].main);
-                $('#temp').text(Math.round(risposta.main.temp));
-                $('.cella').eq(2).find('span').text(risposta.wind.speed);
-                $('.cella').eq(3).find('span').text(risposta.main.pressure);
-                $('.cella').eq(4).find('span').text(risposta.main.humidity);
-                $('.cella').eq(5).find('span').text((new Date(risposta.sys.sunrise * 1000)).toLocaleTimeString().slice(0, 5));
-                $('.cella').eq(6).find('span').text((new Date(risposta.sys.sunset * 1000)).toLocaleTimeString().slice(0, 5));
-                $('.flexCol').find('img').attr('src', 'icone/' + risposta.weather[0].icon + '.svg');
-                $('main').find('h2').text(risposta.name + ', ' + risposta.sys.country);
-                impostaSfondo(risposta.weather[0].icon);
-                temperatura = Math.round(risposta.main.temp);
-                $('body').show();
+                $('main').find('h2').text(risposta.name + ', ' + risposta.sys.country); /*Impostazione nome città e stato*/
+                $('main').children('p').text('(' + risposta.coord.lat + ', ' + risposta.coord.lon + ')'); /*Impostazione coordinate geografiche*/
+                temperatura = Math.round(risposta.main.temp); /*Estrazione dato relativo alla temperatura ambiente*/
+                $('#temp').text(temperatura); /*impostazione della temperatura ambiente*/
+                var nomeIcona = risposta.weather[0].icon; /*Estrazione dato relativo al nome dell'icona da utilizzare*/
+                $('.flexCol').find('img').attr('src', 'icone/' + nomeIcona + '.svg');
+
+                $('.cella').eq(0).find('span').text((new Date(risposta.dt * 1000)).toLocaleDateString()); /*Millisecondi relativi alla data (da moltiplicare per mille perchè formato file non ben formato)*/
+                $('.cella').eq(1).find('span').text(risposta.weather[0].main); /*Impostazione nome tipologia di tempo*/
+                $('.cella').eq(2).find('span').text(risposta.wind.speed); /*Impostazione velocità del vento*/
+                $('.cella').eq(3).find('span').text(risposta.main.pressure); /*Impostazione della pressione atmosferica*/
+                $('.cella').eq(4).find('span').text(risposta.main.humidity); /*Impostazione percentuale di umidità*/
+                $('.cella').eq(5).find('span').text((new Date(risposta.sys.sunrise * 1000)).toLocaleTimeString().slice(0, 5)); /*Millisecondi relativi all'alba da aggiustare*/
+                $('.cella').eq(6).find('span').text((new Date(risposta.sys.sunset * 1000)).toLocaleTimeString().slice(0, 5)); /*Millisecondi relativi al tramonto da aggiustare*/
+
+                impostaSfondo(nomeIcona); /*Richiamo funzione sfondo dinamico*/
+                $('body').show(); /*Chiamata che mostra il contenuto html*/
 
             })
             .fail(function() {
-                window.alert('error');
+                window.alert('Errore nella comunicazione con il server');
             })
             .always(function() {
                 window.console('conclusa');
             });
-        /*});*/
     }
 
+    /*Funzione che a seconda del nome dell'icona passato come parametro seleziona l'opportuno sfondo*/
     function impostaSfondo(tempo) {
-        /*window.alert('Funzione sfondo chiamata da: ' + tempo);*/
         var imgSfondo = '';
         switch (tempo) {
             case '01d':
@@ -97,15 +102,17 @@ $(document).ready(function() {
         $('body').css({ 'background': 'url(immagini/' + imgSfondo + '.jpg) no-repeat fixed center', 'backgroundSize': 'cover' });
     }
 
+    /*Gestione dell'evento click del pulsante per la conversione di scala della temperatura*/
     $('#fromXtoY').on('click', function() {
         var scala = $('#scala').text();
-        $(this).text('Fahrenheit');
         var conversione = temperatura;
         var misura = 'C';
         if (scala == 'C') {
             conversione = ($('#temp').text() * 1.8 + 32).toFixed(1);
             misura = 'F';
             $(this).text('Celsius');
+        } else {
+            $(this).text('Fahrenheit');
         }
         $('#temp').text(conversione);
         $('#scala').text(misura);
