@@ -28,11 +28,24 @@ article.odierno {
 
 .flexCol {
     flex-basis: 20%;
-    border-radius: 10px;
     background: rgba(255, 255, 255, 0.3);
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.flexCol:nth-child(1) {
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+.flexCol:nth-child(2) {
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.flexCol:nth-child(3) {
+	border-radius: 10px;
 }
 
 .flexCol > div {
@@ -46,7 +59,6 @@ article.odierno {
 }
 
 .flexCol > div > img {
-    max-width: 200px;
     width: 100%;
     height: auto;
 }
@@ -54,7 +66,6 @@ article.odierno {
 .flexCol:first-child > div > p {
     font-size: 7vw;
     margin: 0;
-    float: center;
 }
 
 .cella {
@@ -66,7 +77,7 @@ article.odierno {
     background-color: rgba(255, 255, 255, 0.3);
     color: black;
     padding: 10px;
-    border: none;
+    border: 1px solid blue;
     border-radius: 5px;
     cursor: pointer;
 }
